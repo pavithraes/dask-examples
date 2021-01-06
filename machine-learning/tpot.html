@@ -1,25 +1,13 @@
 
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Automate Machine Learning with TPOT &mdash; Dask Examples  documentation</title>
-  
-
-  
-  
-  
   
 
   
@@ -27,6 +15,14 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/explore.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/nbsphinx.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
 
   
   <!--[if lt IE 9]>
@@ -38,7 +34,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -51,8 +46,27 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Generalized Linear Models" href="glm.html" />
     <link rel="prev" title="Use Voting Classifiers" href="voting-classifier.html" />
-    <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
+  <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
   
+  <meta name="Description" content="Automate Machine Learning with TPOT">
+  <meta property="og:description" content="Automate Machine Learning with TPOT">
+  <meta name="twitter:description" content="Automate Machine Learning with TPOT" />
+  <meta property="og:title" content="Dask Examples  documentation - Automate Machine Learning with TPOT">
+  <meta property="og:image" content="https://github.com/dask.png">
+  <meta property="og:image:secure_url" content="https://github.com/dask.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="380" />
+  <meta property="og:image:height" content="380" />
+  <meta property="og:url" content="machine-learning/tpot.html">
+  <meta property="og:site_name" content="Dask Examples  documentation">
+
+  <meta name="twitter:site" content="https://dask.org" />
+  <meta name="twitter:creator" content="@dask_dev" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://github.com/dask.png" />
+  <meta name="twitter:image:alt" content="Dask Examples  documentation">
+  
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -110,7 +124,7 @@
             <li><a href="https://stackoverflow.com/questions/tagged/dask">Stack Overflow</a></li>
             <li><a href="https://twitter.com/dask_dev">Twitter</a></li>
             <li><a href="https://blog.dask.org/"> Developer Blog </a></li>
-            <li><a href="https://www.youtube.com/channel/UCj9eavqmvwaCyKhIlu2GaoA/"> YouTube Channel </a></li>
+            <li><a href="https://youtube.com/c/dask-dev"> YouTube Channel </a></li>
             </ul>
         </li>
         </ul>
@@ -125,7 +139,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Dask Examples
+            <a href="../index.html" class="icon icon-home"> Dask Examples
           
 
           
@@ -250,6 +264,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -261,7 +277,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/machine-learning/tpot.ipynb.txt" rel="nofollow"> View page source</a>
           
         
@@ -280,21 +296,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -395,7 +425,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -461,6 +491,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -572,37 +603,38 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Collecting tpot
-  Downloading TPOT-0.11.5-py3-none-any.whl (82 kB)
-
-Requirement already satisfied: numpy&gt;=1.16.3 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (1.18.5)
-Requirement already satisfied: tqdm&gt;=4.36.1 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (4.49.0)
+  Downloading TPOT-0.11.6.post3-py3-none-any.whl (86 kB)
+     |████████████████████████████████| 86 kB 6.6 MB/s
+Requirement already satisfied: numpy&gt;=1.16.3 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (1.18.5)
+Requirement already satisfied: scikit-learn&gt;=0.22.0 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (0.23.2)
+Requirement already satisfied: joblib&gt;=0.13.2 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (1.0.0)
+Requirement already satisfied: tqdm&gt;=4.36.1 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (4.55.1)
+Requirement already satisfied: xgboost&gt;=1.1.0 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (1.3.0)
+Requirement already satisfied: scipy&gt;=1.3.1 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (1.6.0)
+Requirement already satisfied: pandas&gt;=0.24.2 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from tpot) (1.0.5)
 Collecting deap&gt;=1.2
   Downloading deap-1.3.1-cp38-cp38-manylinux2010_x86_64.whl (157 kB)
-
-Requirement already satisfied: joblib&gt;=0.13.2 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (0.16.0)
-Requirement already satisfied: pandas&gt;=0.24.2 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (1.0.5)
-Requirement already satisfied: scikit-learn&gt;=0.22.0 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (0.23.2)
-Requirement already satisfied: scipy&gt;=1.3.1 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from tpot) (1.5.2)
+     |████████████████████████████████| 157 kB 15.7 MB/s
+Requirement already satisfied: python-dateutil&gt;=2.6.1 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from pandas&gt;=0.24.2-&gt;tpot) (2.8.1)
+Requirement already satisfied: pytz&gt;=2017.2 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from pandas&gt;=0.24.2-&gt;tpot) (2019.3)
+Requirement already satisfied: six&gt;=1.5 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from python-dateutil&gt;=2.6.1-&gt;pandas&gt;=0.24.2-&gt;tpot) (1.15.0)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from scikit-learn&gt;=0.22.0-&gt;tpot) (2.1.0)
 Collecting stopit&gt;=1.1.1
   Downloading stopit-1.1.2.tar.gz (18 kB)
 Collecting update-checker&gt;=0.16
   Downloading update_checker-0.18.0-py3-none-any.whl (7.0 kB)
-Requirement already satisfied: python-dateutil&gt;=2.6.1 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from pandas&gt;=0.24.2-&gt;tpot) (2.8.1)
-Requirement already satisfied: pytz&gt;=2017.2 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from pandas&gt;=0.24.2-&gt;tpot) (2020.1)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from scikit-learn&gt;=0.22.0-&gt;tpot) (2.1.0)
-Requirement already satisfied: requests&gt;=2.3.0 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from update-checker&gt;=0.16-&gt;tpot) (2.24.0)
-Requirement already satisfied: six&gt;=1.5 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from python-dateutil&gt;=2.6.1-&gt;pandas&gt;=0.24.2-&gt;tpot) (1.15.0)
-Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (3.0.4)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (2.10)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (1.25.10)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /home/travis/miniconda/envs/test/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (2020.6.20)
+Requirement already satisfied: requests&gt;=2.3.0 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from update-checker&gt;=0.16-&gt;tpot) (2.25.1)
+Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (3.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (1.26.2)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (2.10)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages (from requests&gt;=2.3.0-&gt;update-checker&gt;=0.16-&gt;tpot) (2020.12.5)
 Building wheels for collected packages: stopit
   Building wheel for stopit (setup.py) ... - done
-  Created wheel for stopit: filename=stopit-1.1.2-py3-none-any.whl size=11956 sha256=d5053f062f1b46380b85cc3e935ae25cafd1ec73dd13c37ae18af569a013be82
-  Stored in directory: /home/travis/.cache/pip/wheels/a8/bb/8f/6b9328d23c2dcedbfeb8498b9f650d55d463089e3b8fc0bfb2
+  Created wheel for stopit: filename=stopit-1.1.2-py3-none-any.whl size=11955 sha256=17a98bc458f7451c5d91bf3c5a8567381b4c7e9b2c11e8e113194669419512a7
+  Stored in directory: /home/runner/.cache/pip/wheels/a8/bb/8f/6b9328d23c2dcedbfeb8498b9f650d55d463089e3b8fc0bfb2
 Successfully built stopit
-Installing collected packages: deap, stopit, update-checker, tpot
-Successfully installed deap-1.3.1 stopit-1.1.2 tpot-0.11.5 update-checker-0.18.0
+Installing collected packages: update-checker, stopit, deap, tpot
+Successfully installed deap-1.3.1 stopit-1.1.2 tpot-0.11.6.post3 update-checker-0.18.0
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -622,7 +654,7 @@ Successfully installed deap-1.3.1 stopit-1.1.2 tpot-0.11.5 update-checker-0.18.0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/home/travis/miniconda/envs/test/lib/python3.8/site-packages/tpot/builtins/__init__.py:36: UserWarning: Warning: optional dependency `torch` is not available. - skipping import of NN models.
+/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/tpot/builtins/__init__.py:36: UserWarning: Warning: optional dependency `torch` is not available. - skipping import of NN models.
   warnings.warn(&#34;Warning: optional dependency `torch` is not available. - skipping import of NN models.&#34;)
 </pre></div></div>
 </div>
@@ -651,7 +683,7 @@ Successfully installed deap-1.3.1 stopit-1.1.2 tpot-0.11.5 update-checker-0.18.0
 <td style="vertical-align: top; border: 0px solid white">
 <h3 style="text-align: left;">Client</h3>
 <ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
-  <li><b>Scheduler: </b>tcp://127.0.0.1:44039</li>
+  <li><b>Scheduler: </b>tcp://127.0.0.1:42621</li>
   <li><b>Dashboard: </b><a href='http://127.0.0.1:8787/status' target='_blank'>http://127.0.0.1:8787/status</a></li>
 </ul>
 </td>
@@ -660,7 +692,7 @@ Successfully installed deap-1.3.1 stopit-1.1.2 tpot-0.11.5 update-checker-0.18.0
 <ul style="text-align: left; list-style:none; margin: 0; padding: 0;">
   <li><b>Workers: </b>4</li>
   <li><b>Cores: </b>4</li>
-  <li><b>Memory: </b>8.36 GB</li>
+  <li><b>Memory: </b>7.29 GB</li>
 </ul>
 </td>
 </tr>
@@ -736,6 +768,8 @@ TPOTClassifier(config_dict={&#39;sklearn.cluster.FeatureAgglomeration&#39;: {&#3
                             &#39;sklearn.decomposition.PCA&#39;: {&#39;iterated_power&#39;: range(1, 11),
                                                           &#39;svd_solver&#39;: [&#39;randomized&#39;]},
                             &#39;sklearn.feature_selection.SelectFwe&#39;: {&#39;alpha&#39;: array([0.   , 0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007...
+                                                                          &#39;max&#39;]},
+                            &#39;sklearn.preprocessing.RobustScaler&#39;: {},
                             &#39;sklearn.preprocessing.StandardScaler&#39;: {},
                             &#39;sklearn.tree.DecisionTreeClassifier&#39;: {&#39;criterion&#39;: [&#39;gini&#39;,
                                                                                   &#39;entropy&#39;],
@@ -743,9 +777,8 @@ TPOTClassifier(config_dict={&#39;sklearn.cluster.FeatureAgglomeration&#39;: {&#3
                                                                     &#39;min_samples_leaf&#39;: range(1, 21),
                                                                     &#39;min_samples_split&#39;: range(2, 21)},
                             &#39;tpot.builtins.ZeroCount&#39;: {}},
-               cv=2, generations=2,
-               log_file=&lt;ipykernel.iostream.OutStream object at 0x7ffa38443580&gt;,
-               n_jobs=-1, population_size=10, random_state=0, use_dask=True)
+               cv=2, generations=2, n_jobs=-1, population_size=10,
+               random_state=0, use_dask=True)
 </pre></div></div>
 </div>
 </div>
@@ -770,37 +803,29 @@ ga('send', 'pageview');
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="glm.html" class="btn btn-neutral float-right" title="Generalized Linear Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="voting-classifier.html" class="btn btn-neutral float-left" title="Use Voting Classifiers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="glm.html" class="btn btn-neutral float-right" title="Generalized Linear Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="voting-classifier.html" class="btn btn-neutral float-left" title="Use Voting Classifiers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2018, Dask Developers
+        &#169; Copyright 2018, Dask Developers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

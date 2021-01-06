@@ -1,25 +1,13 @@
 
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Dask Bags &mdash; Dask Examples  documentation</title>
-  
-
-  
-  
-  
   
 
   
@@ -27,6 +15,14 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/explore.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/nbsphinx.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
 
   
   <!--[if lt IE 9]>
@@ -38,7 +34,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -51,8 +46,27 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Dask DataFrames" href="dataframe.html" />
     <link rel="prev" title="Dask Arrays" href="array.html" />
-    <link rel="shortcut icon" href="_static/images/favicon.ico"/>
+  <link rel="shortcut icon" href="_static/images/favicon.ico"/>
   
+  <meta name="Description" content="Dask Bags">
+  <meta property="og:description" content="Dask Bags">
+  <meta name="twitter:description" content="Dask Bags" />
+  <meta property="og:title" content="Dask Examples  documentation - Dask Bags">
+  <meta property="og:image" content="https://github.com/dask.png">
+  <meta property="og:image:secure_url" content="https://github.com/dask.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="380" />
+  <meta property="og:image:height" content="380" />
+  <meta property="og:url" content="bag.html">
+  <meta property="og:site_name" content="Dask Examples  documentation">
+
+  <meta name="twitter:site" content="https://dask.org" />
+  <meta name="twitter:creator" content="@dask_dev" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://github.com/dask.png" />
+  <meta name="twitter:image:alt" content="Dask Examples  documentation">
+  
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -110,7 +124,7 @@
             <li><a href="https://stackoverflow.com/questions/tagged/dask">Stack Overflow</a></li>
             <li><a href="https://twitter.com/dask_dev">Twitter</a></li>
             <li><a href="https://blog.dask.org/"> Developer Blog </a></li>
-            <li><a href="https://www.youtube.com/channel/UCj9eavqmvwaCyKhIlu2GaoA/"> YouTube Channel </a></li>
+            <li><a href="https://youtube.com/c/dask-dev"> YouTube Channel </a></li>
             </ul>
         </li>
         </ul>
@@ -125,7 +139,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Dask Examples
+            <a href="index.html" class="icon icon-home"> Dask Examples
           
 
           
@@ -254,6 +268,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -265,7 +281,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/bag.ipynb.txt" rel="nofollow"> View page source</a>
           
         
@@ -284,21 +300,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -399,7 +429,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -465,6 +495,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -568,7 +599,7 @@ div.rendered_html tbody tr:hover {
 <td style="vertical-align: top; border: 0px solid white">
 <h3 style="text-align: left;">Client</h3>
 <ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
-  <li><b>Scheduler: </b>tcp://127.0.0.1:43933</li>
+  <li><b>Scheduler: </b>tcp://127.0.0.1:33125</li>
   <li><b>Dashboard: </b><a href='http://127.0.0.1:8787/status' target='_blank'>http://127.0.0.1:8787/status</a></li>
 </ul>
 </td>
@@ -577,7 +608,7 @@ div.rendered_html tbody tr:hover {
 <ul style="text-align: left; list-style:none; margin: 0; padding: 0;">
   <li><b>Workers: </b>4</li>
   <li><b>Cores: </b>4</li>
-  <li><b>Memory: </b>8.36 GB</li>
+  <li><b>Memory: </b>7.29 GB</li>
 </ul>
 </td>
 </tr>
@@ -609,16 +640,16 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;/home/travis/build/dask/dask-examples/data/0.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/1.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/2.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/3.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/4.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/5.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/6.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/7.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/8.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/9.json&#39;]
+[&#39;/home/runner/work/dask-examples/dask-examples/data/0.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/1.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/2.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/3.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/4.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/5.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/6.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/7.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/8.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/9.json&#39;]
 </pre></div></div>
 </div>
 </div>
@@ -639,8 +670,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#34;age&#34;: 39, &#34;name&#34;: [&#34;Wilfredo&#34;, &#34;Silva&#34;], &#34;occupation&#34;: &#34;Farmer&#34;, &#34;telephone&#34;: &#34;(489) 718-1463&#34;, &#34;address&#34;: {&#34;address&#34;: &#34;760 Russia Drive&#34;, &#34;city&#34;: &#34;Allen Park&#34;}, &#34;credit-card&#34;: {&#34;number&#34;: &#34;4890 7910 1700 3335&#34;, &#34;expiration-date&#34;: &#34;05/23&#34;}}
-{&#34;age&#34;: 25, &#34;name&#34;: [&#34;Erline&#34;, &#34;Sloan&#34;], &#34;occupation&#34;: &#34;Chandler&#34;, &#34;telephone&#34;: &#34;+1-(404)-661-5342&#34;, &#34;address&#34;: {&#34;address&#34;: &#34;234 Shaw Brae&#34;, &#34;city&#34;: &#34;Wyoming&#34;}, &#34;credit-card&#34;: {&#34;number&#34;: &#34;3452 021586 06729&#34;, &#34;expiration-date&#34;: &#34;07/25&#34;}}
+{&#34;age&#34;: 58, &#34;name&#34;: [&#34;Edda&#34;, &#34;Molina&#34;], &#34;occupation&#34;: &#34;Civil Engineer&#34;, &#34;telephone&#34;: &#34;631-293-1538&#34;, &#34;address&#34;: {&#34;address&#34;: &#34;1351 Ames Esplanade&#34;, &#34;city&#34;: &#34;Port Arthur&#34;}, &#34;credit-card&#34;: {&#34;number&#34;: &#34;3429 150501 48515&#34;, &#34;expiration-date&#34;: &#34;02/25&#34;}}
+{&#34;age&#34;: 57, &#34;name&#34;: [&#34;Agueda&#34;, &#34;Gordon&#34;], &#34;occupation&#34;: &#34;Moneylender&#34;, &#34;telephone&#34;: &#34;419-901-3125&#34;, &#34;address&#34;: {&#34;address&#34;: &#34;216 Nantucket Avenue&#34;, &#34;city&#34;: &#34;Ridgewood&#34;}, &#34;credit-card&#34;: {&#34;number&#34;: &#34;4395 4910 5474 7635&#34;, &#34;expiration-date&#34;: &#34;08/18&#34;}}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -680,19 +711,19 @@ dask.bag&lt;loads, npartitions=10&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-({&#39;age&#39;: 39,
-  &#39;name&#39;: [&#39;Wilfredo&#39;, &#39;Silva&#39;],
-  &#39;occupation&#39;: &#39;Farmer&#39;,
-  &#39;telephone&#39;: &#39;(489) 718-1463&#39;,
-  &#39;address&#39;: {&#39;address&#39;: &#39;760 Russia Drive&#39;, &#39;city&#39;: &#39;Allen Park&#39;},
-  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4890 7910 1700 3335&#39;,
-   &#39;expiration-date&#39;: &#39;05/23&#39;}},
- {&#39;age&#39;: 25,
-  &#39;name&#39;: [&#39;Erline&#39;, &#39;Sloan&#39;],
-  &#39;occupation&#39;: &#39;Chandler&#39;,
-  &#39;telephone&#39;: &#39;+1-(404)-661-5342&#39;,
-  &#39;address&#39;: {&#39;address&#39;: &#39;234 Shaw Brae&#39;, &#39;city&#39;: &#39;Wyoming&#39;},
-  &#39;credit-card&#39;: {&#39;number&#39;: &#39;3452 021586 06729&#39;, &#39;expiration-date&#39;: &#39;07/25&#39;}})
+({&#39;age&#39;: 58,
+  &#39;name&#39;: [&#39;Edda&#39;, &#39;Molina&#39;],
+  &#39;occupation&#39;: &#39;Civil Engineer&#39;,
+  &#39;telephone&#39;: &#39;631-293-1538&#39;,
+  &#39;address&#39;: {&#39;address&#39;: &#39;1351 Ames Esplanade&#39;, &#39;city&#39;: &#39;Port Arthur&#39;},
+  &#39;credit-card&#39;: {&#39;number&#39;: &#39;3429 150501 48515&#39;, &#39;expiration-date&#39;: &#39;02/25&#39;}},
+ {&#39;age&#39;: 57,
+  &#39;name&#39;: [&#39;Agueda&#39;, &#39;Gordon&#39;],
+  &#39;occupation&#39;: &#39;Moneylender&#39;,
+  &#39;telephone&#39;: &#39;419-901-3125&#39;,
+  &#39;address&#39;: {&#39;address&#39;: &#39;216 Nantucket Avenue&#39;, &#39;city&#39;: &#39;Ridgewood&#39;},
+  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4395 4910 5474 7635&#39;,
+   &#39;expiration-date&#39;: &#39;08/18&#39;}})
 </pre></div></div>
 </div>
 </div>
@@ -714,20 +745,19 @@ dask.bag&lt;loads, npartitions=10&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-({&#39;age&#39;: 39,
-  &#39;name&#39;: [&#39;Wilfredo&#39;, &#39;Silva&#39;],
-  &#39;occupation&#39;: &#39;Farmer&#39;,
-  &#39;telephone&#39;: &#39;(489) 718-1463&#39;,
-  &#39;address&#39;: {&#39;address&#39;: &#39;760 Russia Drive&#39;, &#39;city&#39;: &#39;Allen Park&#39;},
-  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4890 7910 1700 3335&#39;,
-   &#39;expiration-date&#39;: &#39;05/23&#39;}},
- {&#39;age&#39;: 50,
-  &#39;name&#39;: [&#39;Spencer&#39;, &#39;Wood&#39;],
-  &#39;occupation&#39;: &#39;Research Director&#39;,
-  &#39;telephone&#39;: &#39;(431) 111-2477&#39;,
-  &#39;address&#39;: {&#39;address&#39;: &#39;1375 Eldridge Park&#39;, &#39;city&#39;: &#39;Coachella&#39;},
-  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4142 6029 2679 1462&#39;,
-   &#39;expiration-date&#39;: &#39;07/17&#39;}})
+({&#39;age&#39;: 58,
+  &#39;name&#39;: [&#39;Edda&#39;, &#39;Molina&#39;],
+  &#39;occupation&#39;: &#39;Civil Engineer&#39;,
+  &#39;telephone&#39;: &#39;631-293-1538&#39;,
+  &#39;address&#39;: {&#39;address&#39;: &#39;1351 Ames Esplanade&#39;, &#39;city&#39;: &#39;Port Arthur&#39;},
+  &#39;credit-card&#39;: {&#39;number&#39;: &#39;3429 150501 48515&#39;, &#39;expiration-date&#39;: &#39;02/25&#39;}},
+ {&#39;age&#39;: 57,
+  &#39;name&#39;: [&#39;Agueda&#39;, &#39;Gordon&#39;],
+  &#39;occupation&#39;: &#39;Moneylender&#39;,
+  &#39;telephone&#39;: &#39;419-901-3125&#39;,
+  &#39;address&#39;: {&#39;address&#39;: &#39;216 Nantucket Avenue&#39;, &#39;city&#39;: &#39;Ridgewood&#39;},
+  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4395 4910 5474 7635&#39;,
+   &#39;expiration-date&#39;: &#39;08/18&#39;}})
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -745,7 +775,7 @@ dask.bag&lt;loads, npartitions=10&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;Farmer&#39;, &#39;Chandler&#39;)
+(&#39;Civil Engineer&#39;, &#39;Moneylender&#39;)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -808,16 +838,16 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[(&#39;Hairdresser&#39;, 18),
- (&#39;Kennel Hand&#39;, 15),
- (&#39;Psychoanalyst&#39;, 15),
- (&#39;Plant Manager&#39;, 14),
- (&#39;Marketing Coordinator&#39;, 14),
- (&#39;Undertaker&#39;, 14),
- (&#39;Bank Messenger&#39;, 14),
- (&#39;Technical Instructor&#39;, 14),
- (&#39;Licensed Premises&#39;, 13),
- (&#39;Beauty Therapist&#39;, 13)]
+[(&#39;Building Manager&#39;, 18),
+ (&#39;Software Engineer&#39;, 14),
+ (&#39;Health Therapist&#39;, 14),
+ (&#39;Operations&#39;, 14),
+ (&#39;Chambermaid&#39;, 14),
+ (&#39;Hearing Therapist&#39;, 14),
+ (&#39;Furniture Restorer&#39;, 13),
+ (&#39;Rigger&#39;, 13),
+ (&#39;Commissioned&#39;, 13),
+ (&#39;Market Trader&#39;, 13)]
 </pre></div></div>
 </div>
 </div>
@@ -841,16 +871,16 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;/home/travis/build/dask/dask-examples/data/processed.0.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.1.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.2.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.3.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.4.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.5.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.6.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.7.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.8.json&#39;,
- &#39;/home/travis/build/dask/dask-examples/data/processed.9.json&#39;]
+[&#39;/home/runner/work/dask-examples/dask-examples/data/processed.0.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.1.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.2.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.3.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.4.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.5.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.6.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.7.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.8.json&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/data/processed.9.json&#39;]
 </pre></div></div>
 </div>
 </div>
@@ -874,13 +904,12 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-({&#39;age&#39;: 39,
-  &#39;name&#39;: [&#39;Wilfredo&#39;, &#39;Silva&#39;],
-  &#39;occupation&#39;: &#39;Farmer&#39;,
-  &#39;telephone&#39;: &#39;(489) 718-1463&#39;,
-  &#39;address&#39;: {&#39;address&#39;: &#39;760 Russia Drive&#39;, &#39;city&#39;: &#39;Allen Park&#39;},
-  &#39;credit-card&#39;: {&#39;number&#39;: &#39;4890 7910 1700 3335&#39;,
-   &#39;expiration-date&#39;: &#39;05/23&#39;}},)
+({&#39;age&#39;: 58,
+  &#39;name&#39;: [&#39;Edda&#39;, &#39;Molina&#39;],
+  &#39;occupation&#39;: &#39;Civil Engineer&#39;,
+  &#39;telephone&#39;: &#39;631-293-1538&#39;,
+  &#39;address&#39;: {&#39;address&#39;: &#39;1351 Ames Esplanade&#39;, &#39;city&#39;: &#39;Port Arthur&#39;},
+  &#39;credit-card&#39;: {&#39;number&#39;: &#39;3429 150501 48515&#39;, &#39;expiration-date&#39;: &#39;02/25&#39;}},)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -910,14 +939,14 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-({&#39;age&#39;: 39,
-  &#39;occupation&#39;: &#39;Farmer&#39;,
-  &#39;telephone&#39;: &#39;(489) 718-1463&#39;,
-  &#39;credit-card-number&#39;: &#39;4890 7910 1700 3335&#39;,
-  &#39;credit-card-expiration&#39;: &#39;05/23&#39;,
-  &#39;name&#39;: &#39;Wilfredo Silva&#39;,
-  &#39;street-address&#39;: &#39;760 Russia Drive&#39;,
-  &#39;city&#39;: &#39;Allen Park&#39;},)
+({&#39;age&#39;: 58,
+  &#39;occupation&#39;: &#39;Civil Engineer&#39;,
+  &#39;telephone&#39;: &#39;631-293-1538&#39;,
+  &#39;credit-card-number&#39;: &#39;3429 150501 48515&#39;,
+  &#39;credit-card-expiration&#39;: &#39;02/25&#39;,
+  &#39;name&#39;: &#39;Edda Molina&#39;,
+  &#39;street-address&#39;: &#39;1351 Ames Esplanade&#39;,
+  &#39;city&#39;: &#39;Port Arthur&#39;},)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -966,58 +995,58 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
   <tbody>
     <tr>
       <th>0</th>
-      <td>39</td>
-      <td>Farmer</td>
-      <td>(489) 718-1463</td>
-      <td>4890 7910 1700 3335</td>
-      <td>05/23</td>
-      <td>Wilfredo Silva</td>
-      <td>760 Russia Drive</td>
-      <td>Allen Park</td>
+      <td>58</td>
+      <td>Civil Engineer</td>
+      <td>631-293-1538</td>
+      <td>3429 150501 48515</td>
+      <td>02/25</td>
+      <td>Edda Molina</td>
+      <td>1351 Ames Esplanade</td>
+      <td>Port Arthur</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>25</td>
-      <td>Chandler</td>
-      <td>+1-(404)-661-5342</td>
-      <td>3452 021586 06729</td>
-      <td>07/25</td>
-      <td>Erline Sloan</td>
-      <td>234 Shaw Brae</td>
-      <td>Wyoming</td>
+      <td>57</td>
+      <td>Moneylender</td>
+      <td>419-901-3125</td>
+      <td>4395 4910 5474 7635</td>
+      <td>08/18</td>
+      <td>Agueda Gordon</td>
+      <td>216 Nantucket Avenue</td>
+      <td>Ridgewood</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>27</td>
-      <td>Lumberjack</td>
-      <td>(793) 041-7129</td>
-      <td>4001 7633 2769 3515</td>
-      <td>12/25</td>
-      <td>Marcel Morgan</td>
-      <td>92 Forest Hill Gate</td>
-      <td>Santa Monica</td>
+      <td>55</td>
+      <td>Ground Worker</td>
+      <td>(008) 838-4282</td>
+      <td>2232 2592 8389 3228</td>
+      <td>01/21</td>
+      <td>Floretta Orr</td>
+      <td>735 Blackstone Cove</td>
+      <td>Greeley</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>22</td>
-      <td>Legal Assistant</td>
-      <td>431-149-6381</td>
-      <td>2413 7521 1311 8833</td>
-      <td>03/20</td>
-      <td>Verlene Marquez</td>
-      <td>386 Latona Terrace</td>
-      <td>Tucson</td>
+      <td>26</td>
+      <td>Administration Manager</td>
+      <td>909-721-0366</td>
+      <td>5141 0152 6633 5428</td>
+      <td>09/17</td>
+      <td>Librada Merrill</td>
+      <td>1119 Montana Crescent</td>
+      <td>Carteret</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>50</td>
-      <td>Research Director</td>
-      <td>(431) 111-2477</td>
-      <td>4142 6029 2679 1462</td>
-      <td>07/17</td>
-      <td>Spencer Wood</td>
-      <td>1375 Eldridge Park</td>
-      <td>Coachella</td>
+      <td>44</td>
+      <td>Quality Controller</td>
+      <td>470.983.0830</td>
+      <td>4620 0500 1431 2141</td>
+      <td>06/22</td>
+      <td>Luanna Evans</td>
+      <td>1163 Kent Private</td>
+      <td>Spanish Fork</td>
     </tr>
   </tbody>
 </table>
@@ -1039,16 +1068,16 @@ dask.bag&lt;topk-aggregate, npartitions=1&gt;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Hairdresser              18
-Psychoanalyst            15
-Kennel Hand              15
-Marketing Coordinator    14
-Undertaker               14
-Plant Manager            14
-Technical Instructor     14
-Bank Messenger           14
-Travel Clerk             13
-Training Co-ordinator    13
+Building Manager     18
+Hearing Therapist    14
+Software Engineer    14
+Health Therapist     14
+Operations           14
+Chambermaid          14
+Baggage Handler      13
+Commissioned         13
+Playgroup Leader     13
+Chiropractor         13
 Name: occupation, dtype: int64
 </pre></div></div>
 </div>
@@ -1079,37 +1108,29 @@ ga('send', 'pageview');
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="dataframe.html" class="btn btn-neutral float-right" title="Dask DataFrames" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="array.html" class="btn btn-neutral float-left" title="Dask Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="dataframe.html" class="btn btn-neutral float-right" title="Dask DataFrames" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="array.html" class="btn btn-neutral float-left" title="Dask Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2018, Dask Developers
+        &#169; Copyright 2018, Dask Developers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

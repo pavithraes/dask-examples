@@ -1,25 +1,13 @@
 
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Singular Value Decomposition &mdash; Dask Examples  documentation</title>
-  
-
-  
-  
-  
   
 
   
@@ -27,6 +15,14 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/explore.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/nbsphinx.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
 
   
   <!--[if lt IE 9]>
@@ -38,7 +34,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -51,8 +46,27 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Analyze web-hosted JSON data" href="../applications/json-data-on-the-web.html" />
     <link rel="prev" title="Generalized Linear Models" href="glm.html" />
-    <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
+  <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
   
+  <meta name="Description" content="Singular Value Decomposition">
+  <meta property="og:description" content="Singular Value Decomposition">
+  <meta name="twitter:description" content="Singular Value Decomposition" />
+  <meta property="og:title" content="Dask Examples  documentation - Singular Value Decomposition">
+  <meta property="og:image" content="https://github.com/dask.png">
+  <meta property="og:image:secure_url" content="https://github.com/dask.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="380" />
+  <meta property="og:image:height" content="380" />
+  <meta property="og:url" content="machine-learning/svd.html">
+  <meta property="og:site_name" content="Dask Examples  documentation">
+
+  <meta name="twitter:site" content="https://dask.org" />
+  <meta name="twitter:creator" content="@dask_dev" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://github.com/dask.png" />
+  <meta name="twitter:image:alt" content="Dask Examples  documentation">
+  
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -110,7 +124,7 @@
             <li><a href="https://stackoverflow.com/questions/tagged/dask">Stack Overflow</a></li>
             <li><a href="https://twitter.com/dask_dev">Twitter</a></li>
             <li><a href="https://blog.dask.org/"> Developer Blog </a></li>
-            <li><a href="https://www.youtube.com/channel/UCj9eavqmvwaCyKhIlu2GaoA/"> YouTube Channel </a></li>
+            <li><a href="https://youtube.com/c/dask-dev"> YouTube Channel </a></li>
             </ul>
         </li>
         </ul>
@@ -125,7 +139,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Dask Examples
+            <a href="../index.html" class="icon icon-home"> Dask Examples
           
 
           
@@ -249,6 +263,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -260,7 +276,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/machine-learning/svd.ipynb.txt" rel="nofollow"> View page source</a>
           
         
@@ -279,21 +295,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -394,7 +424,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -460,6 +490,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -562,8 +593,8 @@ div.rendered_html tbody tr:hover {
 <td style="vertical-align: top; border: 0px solid white">
 <h3 style="text-align: left;">Client</h3>
 <ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
-  <li><b>Scheduler: </b>inproc://10.20.0.29/13981/1</li>
-  <li><b>Dashboard: </b><a href='http://10.20.0.29:8787/status' target='_blank'>http://10.20.0.29:8787/status</a></li>
+  <li><b>Scheduler: </b>inproc://10.1.0.4/13241/1</li>
+  <li><b>Dashboard: </b><a href='http://10.1.0.4:8787/status' target='_blank'>http://10.1.0.4:8787/status</a></li>
 </ul>
 </td>
 <td style="vertical-align: top; border: 0px solid white">
@@ -604,12 +635,25 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Unable to revert mtime: /usr/share/fonts/cMap
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-cns1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-gb1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-japan1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-japan2
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-korea1
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/machine-learning_svd_5_0.png" src="../_images/machine-learning_svd_5_0.png" />
+<img alt="../_images/machine-learning_svd_5_1.png" src="../_images/machine-learning_svd_5_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -627,19 +671,19 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[ 0.10008089,  0.10004503,  0.10005492, ...,  0.09998363,
-         0.09981999,  0.10000054],
-       [ 0.03280906,  0.11527031,  0.01201647, ...,  0.20713216,
-         0.110397  , -0.02092431],
-       [-0.01378367, -0.11409254,  0.01243394, ..., -0.15792336,
-        -0.00880201, -0.06837556],
+array([[ 0.09998964,  0.10013344,  0.10003409, ...,  0.10003389,
+         0.09999814,  0.10012522],
+       [ 0.05045219, -0.0127171 ,  0.02077528, ...,  0.02094888,
+        -0.01471627, -0.06990789],
+       [-0.05972492, -0.11613244, -0.08713596, ..., -0.03544922,
+         0.08653339, -0.14021558],
        ...,
-       [-0.05572225, -0.0829156 , -0.00752608, ..., -0.01827848,
-        -0.0428163 , -0.07813348],
-       [ 0.04364889,  0.08284049, -0.03870059, ..., -0.05717976,
-        -0.00560695,  0.06592779],
-       [-0.08192455,  0.15614165,  0.03542713, ...,  0.08540583,
-        -0.0584596 , -0.00716079]])
+       [-0.05424176,  0.09736223, -0.15302364, ...,  0.0446896 ,
+         0.06676486, -0.07945979],
+       [ 0.09551908, -0.24754082, -0.0132594 , ...,  0.02088822,
+         0.09244026,  0.02589418],
+       [-0.05456488,  0.06481767,  0.01506259, ...,  0.12912382,
+         0.1139353 ,  0.14882087]])
 </pre></div></div>
 </div>
 </div>
@@ -669,12 +713,25 @@ array([[ 0.10008089,  0.10004503,  0.10005492, ...,  0.09998363,
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Unable to revert mtime: /usr/share/fonts/cMap
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-cns1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-gb1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-japan1
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-japan2
+Unable to revert mtime: /usr/share/fonts/cmap/adobe-korea1
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/machine-learning_svd_9_0.png" src="../_images/machine-learning_svd_9_0.png" />
+<img alt="../_images/machine-learning_svd_9_1.png" src="../_images/machine-learning_svd_9_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -692,16 +749,16 @@ array([[ 0.10008089,  0.10004503,  0.10005492, ...,  0.09998363,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[ 0.00995324,  0.00998563,  0.00996927, ...,  0.01002037,
-         0.00999485,  0.01006774],
-       [-0.0026085 ,  0.00499134,  0.00870917, ...,  0.01252687,
-        -0.0190831 , -0.01262311],
-       [ 0.00292741, -0.0122953 , -0.00339253, ..., -0.01045251,
-        -0.0181253 , -0.00997402],
-       [ 0.00279544, -0.00387972, -0.00322801, ..., -0.00075087,
-        -0.00891793, -0.00045845],
-       [-0.01175107, -0.00964227, -0.00225358, ...,  0.00380927,
-        -0.0001745 , -0.00191984]])
+array([[ 0.0101995 ,  0.0099453 ,  0.00998535, ...,  0.00996938,
+         0.01000848,  0.01006226],
+       [ 0.00089348,  0.00987278, -0.00559827, ...,  0.00522386,
+        -0.00625221,  0.00302973],
+       [ 0.00015133, -0.00330841,  0.01516728, ..., -0.00518028,
+        -0.00591531, -0.01002533],
+       [ 0.00567913,  0.00835631,  0.00125749, ..., -0.0020733 ,
+         0.00758485, -0.013635  ],
+       [-0.00086534, -0.00387836, -0.0044818 , ..., -0.0082245 ,
+        -0.01048386,  0.01333859]])
 </pre></div></div>
 </div>
 </div>
@@ -722,37 +779,29 @@ ga('send', 'pageview');
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../applications/json-data-on-the-web.html" class="btn btn-neutral float-right" title="Analyze web-hosted JSON data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="glm.html" class="btn btn-neutral float-left" title="Generalized Linear Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../applications/json-data-on-the-web.html" class="btn btn-neutral float-right" title="Analyze web-hosted JSON data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="glm.html" class="btn btn-neutral float-left" title="Generalized Linear Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2018, Dask Developers
+        &#169; Copyright 2018, Dask Developers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

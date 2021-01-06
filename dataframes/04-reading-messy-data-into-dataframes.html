@@ -1,25 +1,13 @@
 
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>DataFrames: Reading in messy data &mdash; Dask Examples  documentation</title>
-  
-
-  
-  
-  
   
 
   
@@ -27,6 +15,14 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/explore.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/nbsphinx.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
 
   
   <!--[if lt IE 9]>
@@ -38,7 +34,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -49,8 +44,27 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
+  <link rel="shortcut icon" href="../_static/images/favicon.ico"/>
   
+  <meta name="Description" content="DataFrames: Reading in messy data">
+  <meta property="og:description" content="DataFrames: Reading in messy data">
+  <meta name="twitter:description" content="DataFrames: Reading in messy data" />
+  <meta property="og:title" content="Dask Examples  documentation - DataFrames: Reading in messy data">
+  <meta property="og:image" content="https://github.com/dask.png">
+  <meta property="og:image:secure_url" content="https://github.com/dask.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="380" />
+  <meta property="og:image:height" content="380" />
+  <meta property="og:url" content="dataframes/04-reading-messy-data-into-dataframes.html">
+  <meta property="og:site_name" content="Dask Examples  documentation">
+
+  <meta name="twitter:site" content="https://dask.org" />
+  <meta name="twitter:creator" content="@dask_dev" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://github.com/dask.png" />
+  <meta name="twitter:image:alt" content="Dask Examples  documentation">
+  
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -108,7 +122,7 @@
             <li><a href="https://stackoverflow.com/questions/tagged/dask">Stack Overflow</a></li>
             <li><a href="https://twitter.com/dask_dev">Twitter</a></li>
             <li><a href="https://blog.dask.org/"> Developer Blog </a></li>
-            <li><a href="https://www.youtube.com/channel/UCj9eavqmvwaCyKhIlu2GaoA/"> YouTube Channel </a></li>
+            <li><a href="https://youtube.com/c/dask-dev"> YouTube Channel </a></li>
             </ul>
         </li>
         </ul>
@@ -123,7 +137,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Dask Examples
+            <a href="../index.html" class="icon icon-home"> Dask Examples
           
 
           
@@ -242,6 +256,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -253,7 +269,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/dataframes/04-reading-messy-data-into-dataframes.ipynb.txt" rel="nofollow"> View page source</a>
           
         
@@ -272,21 +288,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -387,7 +417,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -453,6 +483,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -555,8 +586,8 @@ div.rendered_html tbody tr:hover {
 <td style="vertical-align: top; border: 0px solid white">
 <h3 style="text-align: left;">Client</h3>
 <ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
-  <li><b>Scheduler: </b>inproc://10.20.0.29/11549/1</li>
-  <li><b>Dashboard: </b><a href='http://10.20.0.29:8787/status' target='_blank'>http://10.20.0.29:8787/status</a></li>
+  <li><b>Scheduler: </b>inproc://10.1.0.4/10721/1</li>
+  <li><b>Dashboard: </b><a href='http://10.1.0.4:8787/status' target='_blank'>http://10.1.0.4:8787/status</a></li>
 </ul>
 </td>
 <td style="vertical-align: top; border: 0px solid white">
@@ -664,7 +695,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div>Dask Name: make-timeseries, 30 tasks</div></div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
@@ -690,6 +721,44 @@ div.rendered_html tbody tr:hover {
 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/*.csv&#39;</span><span class="p">,</span> <span class="n">name_function</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-01.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-02.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-03.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-04.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-05.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-06.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-07.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-08.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-09.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-10.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-11.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-12.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-13.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-14.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-15.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-16.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-17.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-18.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-19.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-20.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-21.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-22.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-23.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-24.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-25.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-26.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-27.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-28.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-29.csv&#39;,
+ &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-30.csv&#39;]
+</pre></div></div>
 </div>
 </div>
 <div class="section" id="Read-CSV-files">
@@ -852,38 +921,38 @@ data/2000-01-10.csv
   <tbody>
     <tr>
       <th>0</th>
-      <td>982</td>
-      <td>Tim</td>
-      <td>-0.692850</td>
-      <td>-0.517398</td>
+      <td>1000</td>
+      <td>Wendy</td>
+      <td>-0.455991</td>
+      <td>-0.267803</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>996</td>
-      <td>Sarah</td>
-      <td>0.488355</td>
-      <td>-0.376307</td>
+      <td>970</td>
+      <td>Ingrid</td>
+      <td>-0.797437</td>
+      <td>0.454575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>964</td>
-      <td>Kevin</td>
-      <td>0.548217</td>
-      <td>-0.059030</td>
+      <td>1008</td>
+      <td>Edith</td>
+      <td>0.430180</td>
+      <td>-0.506511</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1041</td>
-      <td>Frank</td>
-      <td>0.436288</td>
-      <td>-0.308014</td>
+      <td>960</td>
+      <td>Wendy</td>
+      <td>0.803023</td>
+      <td>0.822974</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>962</td>
-      <td>Quinn</td>
-      <td>0.778569</td>
-      <td>-0.879599</td>
+      <td>1006</td>
+      <td>Yvonne</td>
+      <td>0.556653</td>
+      <td>-0.786353</td>
     </tr>
   </tbody>
 </table>
@@ -936,45 +1005,45 @@ data/2000-01-10.csv
     </tr>
     <tr>
       <th>mean</th>
-      <td>1.000003e+03</td>
-      <td>1.244123e-04</td>
-      <td>2.516625e-04</td>
+      <td>9.999781e+02</td>
+      <td>7.448238e-04</td>
+      <td>2.257596e-04</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>3.161033e+01</td>
-      <td>5.771974e-01</td>
-      <td>5.773618e-01</td>
+      <td>3.162814e+01</td>
+      <td>5.773940e-01</td>
+      <td>5.773022e-01</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>8.300000e+02</td>
-      <td>-9.999997e-01</td>
-      <td>-9.999982e-01</td>
+      <td>8.360000e+02</td>
+      <td>-9.999991e-01</td>
+      <td>-9.999996e-01</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>9.790000e+02</td>
-      <td>-4.944113e-01</td>
-      <td>-4.896296e-01</td>
+      <td>-4.950141e-01</td>
+      <td>-4.961357e-01</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>1.000000e+03</td>
-      <td>8.884265e-03</td>
-      <td>9.616791e-03</td>
+      <td>7.317552e-03</td>
+      <td>5.409636e-03</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1.022000e+03</td>
-      <td>5.056111e-01</td>
-      <td>5.071397e-01</td>
+      <td>1.021000e+03</td>
+      <td>5.055906e-01</td>
+      <td>5.079348e-01</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>1.161000e+03</td>
-      <td>1.000000e+00</td>
-      <td>9.999987e-01</td>
+      <td>1.171000e+03</td>
+      <td>9.999976e-01</td>
+      <td>9.999998e-01</td>
     </tr>
   </tbody>
 </table>
@@ -1033,15 +1102,15 @@ data/2000-01-10.csv
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 id,name,x
-988,Michael,0.7082912975898172
-1010,Sarah,-0.2476169646274855
-1031,Xavier,0.2618495916569585
-919,Ursula,-0.7500500192296453
-1009,Tim,-0.18446533347053015
-1043,Charlie,0.17954212234001066
-1003,Wendy,-0.6490425768293517
-1001,Xavier,0.6256238148742186
-962,Michael,-0.9684938012404584
+1002,Edith,0.465230264550529
+1029,Laura,-0.5648984570475317
+1018,Victor,0.6513669592936779
+1001,Hannah,0.33285157300349066
+951,Edith,-0.3978644888721288
+1011,Tim,-0.5280527791073384
+1037,Victor,0.4321327545778726
+999,George,-0.6921885229372122
+1009,Michael,-0.6853040540484736
 </pre></div></div>
 </div>
 </div>
@@ -1098,38 +1167,38 @@ id,name,x
   <tbody>
     <tr>
       <th>0</th>
-      <td>982</td>
-      <td>Tim</td>
-      <td>-0.692850</td>
-      <td>-0.517398</td>
+      <td>1000</td>
+      <td>Wendy</td>
+      <td>-0.455991</td>
+      <td>-0.267803</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>996</td>
-      <td>Sarah</td>
-      <td>0.488355</td>
-      <td>-0.376307</td>
+      <td>970</td>
+      <td>Ingrid</td>
+      <td>-0.797437</td>
+      <td>0.454575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>964</td>
-      <td>Kevin</td>
-      <td>0.548217</td>
-      <td>-0.059030</td>
+      <td>1008</td>
+      <td>Edith</td>
+      <td>0.430180</td>
+      <td>-0.506511</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1041</td>
-      <td>Frank</td>
-      <td>0.436288</td>
-      <td>-0.308014</td>
+      <td>960</td>
+      <td>Wendy</td>
+      <td>0.803023</td>
+      <td>0.822974</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>962</td>
-      <td>Quinn</td>
-      <td>0.778569</td>
-      <td>-0.879599</td>
+      <td>1006</td>
+      <td>Yvonne</td>
+      <td>0.556653</td>
+      <td>-0.786353</td>
     </tr>
   </tbody>
 </table>
@@ -1152,7 +1221,7 @@ id,name,x
 <div class="highlight"><pre>
 distributed.worker - WARNING -  Compute Failed
 Function:  execute_task
-args:      ((subgraph_callable, (&lt;function pandas_read_text at 0x7f9e4d597790&gt;, &lt;function _make_parser_function.&lt;locals&gt;.parser_f at 0x7f9e4f7703a0&gt;, (&lt;function read_block_from_file at 0x7f9e4753c040&gt;, &lt;OpenFile &#39;/home/travis/build/dask/dask-examples/dataframes/data/2000-01-07.csv&#39;&gt;, 0, 64000000, b&#39;\n&#39;), b&#39;id,name,x,y\n&#39;, {}, {&#39;id&#39;: dtype(&#39;int64&#39;), &#39;name&#39;: dtype(&#39;O&#39;), &#39;x&#39;: dtype(&#39;float64&#39;), &#39;y&#39;: dtype(&#39;float64&#39;)}, [&#39;id&#39;, &#39;name&#39;, &#39;x&#39;, &#39;y&#39;], False, False, None), &#39;read-csv-3851fdce109798b09f9bd8543b0fb265&#39;))
+args:      ((subgraph_callable, (&lt;function pandas_read_text at 0x7fd21eae7160&gt;, &lt;function _make_parser_function.&lt;locals&gt;.parser_f at 0x7fd224c3c310&gt;, (&lt;function read_block_from_file at 0x7fd21cac1940&gt;, &lt;OpenFile &#39;/home/runner/work/dask-examples/dask-examples/dataframes/data/2000-01-07.csv&#39;&gt;, 0, 64000000, b&#39;\n&#39;), b&#39;id,name,x,y\n&#39;, {}, {&#39;id&#39;: dtype(&#39;int64&#39;), &#39;name&#39;: dtype(&#39;O&#39;), &#39;x&#39;: dtype(&#39;float64&#39;), &#39;y&#39;: dtype(&#39;float64&#39;)}, [&#39;id&#39;, &#39;name&#39;, &#39;x&#39;, &#39;y&#39;], False, False, None), &#39;read-csv-e76d757d6ba11ed21c5bc1e3793ef945&#39;))
 kwargs:    {}
 Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new values have 4 elements&#39;)
 
@@ -1165,80 +1234,80 @@ Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new va
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-14-f353d64adb46&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-1-f353d64adb46&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>df<span class="ansi-blue-fg">.</span>describe<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>compute<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/dask/base.py</span> in <span class="ansi-cyan-fg">compute</span><span class="ansi-blue-fg">(self, **kwargs)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/dask/base.py</span> in <span class="ansi-cyan-fg">compute</span><span class="ansi-blue-fg">(self, **kwargs)</span>
 <span class="ansi-green-intense-fg ansi-bold">    164</span>         dask<span class="ansi-blue-fg">.</span>base<span class="ansi-blue-fg">.</span>compute
 <span class="ansi-green-intense-fg ansi-bold">    165</span>         &#34;&#34;&#34;
 <span class="ansi-green-fg">--&gt; 166</span><span class="ansi-red-fg">         </span><span class="ansi-blue-fg">(</span>result<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">=</span> compute<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> traverse<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">return</span> result
 <span class="ansi-green-intense-fg ansi-bold">    168</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/dask/base.py</span> in <span class="ansi-cyan-fg">compute</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/dask/base.py</span> in <span class="ansi-cyan-fg">compute</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
 <span class="ansi-green-intense-fg ansi-bold">    442</span>         postcomputes<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">.</span>__dask_postcompute__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    443</span>
 <span class="ansi-green-fg">--&gt; 444</span><span class="ansi-red-fg">     </span>results <span class="ansi-blue-fg">=</span> schedule<span class="ansi-blue-fg">(</span>dsk<span class="ansi-blue-fg">,</span> keys<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    445</span>     <span class="ansi-green-fg">return</span> repack<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>f<span class="ansi-blue-fg">(</span>r<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>a<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> r<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">in</span> zip<span class="ansi-blue-fg">(</span>results<span class="ansi-blue-fg">,</span> postcomputes<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    446</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(self, dsk, keys, restrictions, loose_restrictions, resources, sync, asynchronous, direct, retries, priority, fifo_timeout, actors, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2712</span>                     should_rejoin <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
-<span class="ansi-green-intense-fg ansi-bold">   2713</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 2714</span><span class="ansi-red-fg">                 </span>results <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>gather<span class="ansi-blue-fg">(</span>packed<span class="ansi-blue-fg">,</span> asynchronous<span class="ansi-blue-fg">=</span>asynchronous<span class="ansi-blue-fg">,</span> direct<span class="ansi-blue-fg">=</span>direct<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2715</span>             <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   2716</span>                 <span class="ansi-green-fg">for</span> f <span class="ansi-green-fg">in</span> futures<span class="ansi-blue-fg">.</span>values<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(self, dsk, keys, restrictions, loose_restrictions, resources, sync, asynchronous, direct, retries, priority, fifo_timeout, actors, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2723</span>                     should_rejoin <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+<span class="ansi-green-intense-fg ansi-bold">   2724</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 2725</span><span class="ansi-red-fg">                 </span>results <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>gather<span class="ansi-blue-fg">(</span>packed<span class="ansi-blue-fg">,</span> asynchronous<span class="ansi-blue-fg">=</span>asynchronous<span class="ansi-blue-fg">,</span> direct<span class="ansi-blue-fg">=</span>direct<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2726</span>             <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   2727</span>                 <span class="ansi-green-fg">for</span> f <span class="ansi-green-fg">in</span> futures<span class="ansi-blue-fg">.</span>values<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">gather</span><span class="ansi-blue-fg">(self, futures, errors, direct, asynchronous)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1985</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1986</span>                 local_worker <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-fg">-&gt; 1987</span><span class="ansi-red-fg">             return self.sync(
-</span><span class="ansi-green-intense-fg ansi-bold">   1988</span>                 self<span class="ansi-blue-fg">.</span>_gather<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">   1989</span>                 futures<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">gather</span><span class="ansi-blue-fg">(self, futures, errors, direct, asynchronous)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1984</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1985</span>                 local_worker <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-fg">-&gt; 1986</span><span class="ansi-red-fg">             return self.sync(
+</span><span class="ansi-green-intense-fg ansi-bold">   1987</span>                 self<span class="ansi-blue-fg">.</span>_gather<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1988</span>                 futures<span class="ansi-blue-fg">,</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">sync</span><span class="ansi-blue-fg">(self, func, asynchronous, callback_timeout, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    831</span>             <span class="ansi-green-fg">return</span> future
-<span class="ansi-green-intense-fg ansi-bold">    832</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 833</span><span class="ansi-red-fg">             return sync(
-</span><span class="ansi-green-intense-fg ansi-bold">    834</span>                 self<span class="ansi-blue-fg">.</span>loop<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> callback_timeout<span class="ansi-blue-fg">=</span>callback_timeout<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs
-<span class="ansi-green-intense-fg ansi-bold">    835</span>             )
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">sync</span><span class="ansi-blue-fg">(self, func, asynchronous, callback_timeout, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    830</span>             <span class="ansi-green-fg">return</span> future
+<span class="ansi-green-intense-fg ansi-bold">    831</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 832</span><span class="ansi-red-fg">             return sync(
+</span><span class="ansi-green-intense-fg ansi-bold">    833</span>                 self<span class="ansi-blue-fg">.</span>loop<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> callback_timeout<span class="ansi-blue-fg">=</span>callback_timeout<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs
+<span class="ansi-green-intense-fg ansi-bold">    834</span>             )
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/utils.py</span> in <span class="ansi-cyan-fg">sync</span><span class="ansi-blue-fg">(loop, func, callback_timeout, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    337</span>     <span class="ansi-green-fg">if</span> error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    338</span>         typ<span class="ansi-blue-fg">,</span> exc<span class="ansi-blue-fg">,</span> tb <span class="ansi-blue-fg">=</span> error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-fg">--&gt; 339</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> exc<span class="ansi-blue-fg">.</span>with_traceback<span class="ansi-blue-fg">(</span>tb<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    340</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    341</span>         <span class="ansi-green-fg">return</span> result<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/utils.py</span> in <span class="ansi-cyan-fg">sync</span><span class="ansi-blue-fg">(loop, func, callback_timeout, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    338</span>     <span class="ansi-green-fg">if</span> error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    339</span>         typ<span class="ansi-blue-fg">,</span> exc<span class="ansi-blue-fg">,</span> tb <span class="ansi-blue-fg">=</span> error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">--&gt; 340</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> exc<span class="ansi-blue-fg">.</span>with_traceback<span class="ansi-blue-fg">(</span>tb<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    341</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    342</span>         <span class="ansi-green-fg">return</span> result<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/utils.py</span> in <span class="ansi-cyan-fg">f</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">    321</span>             <span class="ansi-green-fg">if</span> callback_timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    322</span>                 future <span class="ansi-blue-fg">=</span> asyncio<span class="ansi-blue-fg">.</span>wait_for<span class="ansi-blue-fg">(</span>future<span class="ansi-blue-fg">,</span> callback_timeout<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 323</span><span class="ansi-red-fg">             </span>result<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">yield</span> future
-<span class="ansi-green-intense-fg ansi-bold">    324</span>         <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> exc<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    325</span>             error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>exc_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/utils.py</span> in <span class="ansi-cyan-fg">f</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">    322</span>             <span class="ansi-green-fg">if</span> callback_timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    323</span>                 future <span class="ansi-blue-fg">=</span> asyncio<span class="ansi-blue-fg">.</span>wait_for<span class="ansi-blue-fg">(</span>future<span class="ansi-blue-fg">,</span> callback_timeout<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 324</span><span class="ansi-red-fg">             </span>result<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">yield</span> future
+<span class="ansi-green-intense-fg ansi-bold">    325</span>         <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> exc<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    326</span>             error<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>exc_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/tornado/gen.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    733</span>
-<span class="ansi-green-intense-fg ansi-bold">    734</span>                     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 735</span><span class="ansi-red-fg">                         </span>value <span class="ansi-blue-fg">=</span> future<span class="ansi-blue-fg">.</span>result<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    736</span>                     <span class="ansi-green-fg">except</span> Exception<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    737</span>                         exc_info <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>exc_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/tornado/gen.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    760</span>
+<span class="ansi-green-intense-fg ansi-bold">    761</span>                     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 762</span><span class="ansi-red-fg">                         </span>value <span class="ansi-blue-fg">=</span> future<span class="ansi-blue-fg">.</span>result<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    763</span>                     <span class="ansi-green-fg">except</span> Exception<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    764</span>                         exc_info <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>exc_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">_gather</span><span class="ansi-blue-fg">(self, futures, errors, direct, local_worker)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1850</span>                             exc <span class="ansi-blue-fg">=</span> CancelledError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1851</span>                         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1852</span><span class="ansi-red-fg">                             </span><span class="ansi-green-fg">raise</span> exception<span class="ansi-blue-fg">.</span>with_traceback<span class="ansi-blue-fg">(</span>traceback<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1853</span>                         <span class="ansi-green-fg">raise</span> exc
-<span class="ansi-green-intense-fg ansi-bold">   1854</span>                     <span class="ansi-green-fg">if</span> errors <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;skip&#34;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/distributed/client.py</span> in <span class="ansi-cyan-fg">_gather</span><span class="ansi-blue-fg">(self, futures, errors, direct, local_worker)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1849</span>                             exc <span class="ansi-blue-fg">=</span> CancelledError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1850</span>                         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1851</span><span class="ansi-red-fg">                             </span><span class="ansi-green-fg">raise</span> exception<span class="ansi-blue-fg">.</span>with_traceback<span class="ansi-blue-fg">(</span>traceback<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1852</span>                         <span class="ansi-green-fg">raise</span> exc
+<span class="ansi-green-intense-fg ansi-bold">   1853</span>                     <span class="ansi-green-fg">if</span> errors <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;skip&#34;</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/dask/dataframe/io/csv.py</span> in <span class="ansi-cyan-fg">pandas_read_text</span><span class="ansi-blue-fg">(reader, b, header, kwargs, dtypes, columns, write_header, enforce, path)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/dask/dataframe/io/csv.py</span> in <span class="ansi-cyan-fg">pandas_read_text</span><span class="ansi-blue-fg">(reader, b, header, kwargs, dtypes, columns, write_header, enforce, path)</span>
 <span class="ansi-green-intense-fg ansi-bold">    154</span>         <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Columns do not match&#34;</span><span class="ansi-blue-fg">,</span> df<span class="ansi-blue-fg">.</span>columns<span class="ansi-blue-fg">,</span> columns<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    155</span>     <span class="ansi-green-fg">elif</span> columns<span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">--&gt; 156</span><span class="ansi-red-fg">         </span>df<span class="ansi-blue-fg">.</span>columns <span class="ansi-blue-fg">=</span> columns
 <span class="ansi-green-intense-fg ansi-bold">    157</span>     <span class="ansi-green-fg">if</span> path<span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">    158</span>         colname<span class="ansi-blue-fg">,</span> path<span class="ansi-blue-fg">,</span> paths <span class="ansi-blue-fg">=</span> path
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">__setattr__</span><span class="ansi-blue-fg">(self, name, value)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">__setattr__</span><span class="ansi-blue-fg">(self, name, value)</span>
 <span class="ansi-green-intense-fg ansi-bold">   5285</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">   5286</span>             object<span class="ansi-blue-fg">.</span>__getattribute__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-fg">-&gt; 5287</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> object<span class="ansi-blue-fg">.</span>__setattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span>
@@ -1247,14 +1316,14 @@ Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new va
 
 <span class="ansi-green-fg">pandas/_libs/properties.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.properties.AxisProperty.__set__</span><span class="ansi-blue-fg">()</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">_set_axis</span><span class="ansi-blue-fg">(self, axis, labels)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">_set_axis</span><span class="ansi-blue-fg">(self, axis, labels)</span>
 <span class="ansi-green-intense-fg ansi-bold">    659</span>
 <span class="ansi-green-intense-fg ansi-bold">    660</span>     <span class="ansi-green-fg">def</span> _set_axis<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">,</span> labels<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">--&gt; 661</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_data<span class="ansi-blue-fg">.</span>set_axis<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">,</span> labels<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    662</span>         self<span class="ansi-blue-fg">.</span>_clear_item_cache<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    663</span>
 
-<span class="ansi-green-fg">~/miniconda/envs/test/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ansi-cyan-fg">set_axis</span><span class="ansi-blue-fg">(self, axis, new_labels)</span>
+<span class="ansi-green-fg">/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ansi-cyan-fg">set_axis</span><span class="ansi-blue-fg">(self, axis, new_labels)</span>
 <span class="ansi-green-intense-fg ansi-bold">    175</span>
 <span class="ansi-green-intense-fg ansi-bold">    176</span>         <span class="ansi-green-fg">if</span> new_len <span class="ansi-blue-fg">!=</span> old_len<span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">--&gt; 177</span><span class="ansi-red-fg">             raise ValueError(
@@ -1340,38 +1409,38 @@ Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new va
   <tbody>
     <tr>
       <th>0</th>
-      <td>982</td>
-      <td>Tim</td>
-      <td>-0.692850</td>
-      <td>-0.517398</td>
+      <td>1000</td>
+      <td>Wendy</td>
+      <td>-0.455991</td>
+      <td>-0.267803</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>996</td>
-      <td>Sarah</td>
-      <td>0.488355</td>
-      <td>-0.376307</td>
+      <td>970</td>
+      <td>Ingrid</td>
+      <td>-0.797437</td>
+      <td>0.454575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>964</td>
-      <td>Kevin</td>
-      <td>0.548217</td>
-      <td>-0.059030</td>
+      <td>1008</td>
+      <td>Edith</td>
+      <td>0.430180</td>
+      <td>-0.506511</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1041</td>
-      <td>Frank</td>
-      <td>0.436288</td>
-      <td>-0.308014</td>
+      <td>960</td>
+      <td>Wendy</td>
+      <td>0.803023</td>
+      <td>0.822974</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>962</td>
-      <td>Quinn</td>
-      <td>0.778569</td>
-      <td>-0.879599</td>
+      <td>1006</td>
+      <td>Yvonne</td>
+      <td>0.556653</td>
+      <td>-0.786353</td>
     </tr>
   </tbody>
 </table>
@@ -1463,37 +1532,37 @@ Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new va
   <tbody>
     <tr>
       <th>0</th>
-      <td>988</td>
-      <td>Michael</td>
-      <td>0.708291</td>
+      <td>1002</td>
+      <td>Edith</td>
+      <td>0.465230</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1010</td>
-      <td>Sarah</td>
-      <td>-0.247617</td>
+      <td>1029</td>
+      <td>Laura</td>
+      <td>-0.564898</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1031</td>
-      <td>Xavier</td>
-      <td>0.261850</td>
+      <td>1018</td>
+      <td>Victor</td>
+      <td>0.651367</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>919</td>
-      <td>Ursula</td>
-      <td>-0.750050</td>
+      <td>1001</td>
+      <td>Hannah</td>
+      <td>0.332852</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1009</td>
-      <td>Tim</td>
-      <td>-0.184465</td>
+      <td>951</td>
+      <td>Edith</td>
+      <td>-0.397864</td>
       <td>NaN</td>
     </tr>
   </tbody>
@@ -1531,7 +1600,7 @@ Exception: ValueError(&#39;Length mismatch: Expected axis has 3 elements, new va
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
+Delayed(&#39;read_data-0542ac1e-71d1-495a-a581-339d7b49b1e9&#39;)
 </pre></div></div>
 </div>
 <p>It creates a delayed object, to actually run read the file we need to run <code class="docutils literal notranslate"><span class="pre">.compute()</span></code></p>
@@ -1576,38 +1645,38 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
   <tbody>
     <tr>
       <th>0</th>
-      <td>982</td>
-      <td>Tim</td>
-      <td>-0.692850</td>
-      <td>-0.517398</td>
+      <td>1000</td>
+      <td>Wendy</td>
+      <td>-0.455991</td>
+      <td>-0.267803</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>996</td>
-      <td>Sarah</td>
-      <td>0.488355</td>
-      <td>-0.376307</td>
+      <td>970</td>
+      <td>Ingrid</td>
+      <td>-0.797437</td>
+      <td>0.454575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>964</td>
-      <td>Kevin</td>
-      <td>0.548217</td>
-      <td>-0.059030</td>
+      <td>1008</td>
+      <td>Edith</td>
+      <td>0.430180</td>
+      <td>-0.506511</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1041</td>
-      <td>Frank</td>
-      <td>0.436288</td>
-      <td>-0.308014</td>
+      <td>960</td>
+      <td>Wendy</td>
+      <td>0.803023</td>
+      <td>0.822974</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>962</td>
-      <td>Quinn</td>
-      <td>0.778569</td>
-      <td>-0.879599</td>
+      <td>1006</td>
+      <td>Yvonne</td>
+      <td>0.556653</td>
+      <td>-0.786353</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1618,38 +1687,38 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
     </tr>
     <tr>
       <th>86395</th>
-      <td>998</td>
-      <td>Ray</td>
-      <td>0.385076</td>
-      <td>0.689249</td>
+      <td>995</td>
+      <td>Ursula</td>
+      <td>-0.600736</td>
+      <td>-0.522731</td>
     </tr>
     <tr>
       <th>86396</th>
-      <td>1003</td>
-      <td>Victor</td>
-      <td>-0.638628</td>
-      <td>-0.471912</td>
+      <td>1005</td>
+      <td>Ursula</td>
+      <td>0.619401</td>
+      <td>0.447979</td>
     </tr>
     <tr>
       <th>86397</th>
-      <td>998</td>
-      <td>Sarah</td>
-      <td>0.327802</td>
-      <td>-0.279046</td>
+      <td>1013</td>
+      <td>Xavier</td>
+      <td>-0.892085</td>
+      <td>0.310046</td>
     </tr>
     <tr>
       <th>86398</th>
-      <td>1006</td>
-      <td>Frank</td>
-      <td>-0.127129</td>
-      <td>-0.050997</td>
+      <td>961</td>
+      <td>Bob</td>
+      <td>0.135414</td>
+      <td>-0.981457</td>
     </tr>
     <tr>
       <th>86399</th>
-      <td>1014</td>
-      <td>Edith</td>
-      <td>-0.663659</td>
-      <td>-0.951150</td>
+      <td>1013</td>
+      <td>Michael</td>
+      <td>0.713817</td>
+      <td>0.040323</td>
     </tr>
   </tbody>
 </table>
@@ -1675,36 +1744,36 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;data/2000-01-13.csv&#39;,
- &#39;data/2000-01-02.csv&#39;,
- &#39;data/2000-01-24.csv&#39;,
- &#39;data/2000-01-04.csv&#39;,
- &#39;data/2000-01-09.csv&#39;,
- &#39;data/2000-01-17.csv&#39;,
- &#39;data/2000-01-06.csv&#39;,
- &#39;data/2000-01-08.csv&#39;,
- &#39;data/2000-01-11.csv&#39;,
- &#39;data/2000-01-28.csv&#39;,
- &#39;data/2000-01-29.csv&#39;,
- &#39;data/2000-01-18.csv&#39;,
- &#39;data/2000-01-16.csv&#39;,
- &#39;data/2000-01-05.csv&#39;,
- &#39;data/2000-01-30.csv&#39;,
- &#39;data/2000-01-20.csv&#39;,
- &#39;data/2000-01-19.csv&#39;,
- &#39;data/2000-01-21.csv&#39;,
- &#39;data/2000-01-27.csv&#39;,
+[&#39;data/2000-01-01.csv&#39;,
  &#39;data/2000-01-12.csv&#39;,
- &#39;data/2000-01-01.csv&#39;,
+ &#39;data/2000-01-02.csv&#39;,
+ &#39;data/2000-01-25.csv&#39;,
+ &#39;data/2000-01-17.csv&#39;,
+ &#39;data/2000-01-03.csv&#39;,
+ &#39;data/2000-01-16.csv&#39;,
+ &#39;data/2000-01-24.csv&#39;,
+ &#39;data/2000-01-15.csv&#39;,
  &#39;data/2000-01-07.csv&#39;,
  &#39;data/2000-01-10.csv&#39;,
- &#39;data/2000-01-25.csv&#39;,
- &#39;data/2000-01-14.csv&#39;,
+ &#39;data/2000-01-20.csv&#39;,
+ &#39;data/2000-01-09.csv&#39;,
+ &#39;data/2000-01-06.csv&#39;,
  &#39;data/2000-01-26.csv&#39;,
+ &#39;data/2000-01-21.csv&#39;,
+ &#39;data/2000-01-29.csv&#39;,
+ &#39;data/2000-01-19.csv&#39;,
+ &#39;data/2000-01-04.csv&#39;,
+ &#39;data/2000-01-22.csv&#39;,
+ &#39;data/2000-01-28.csv&#39;,
+ &#39;data/2000-01-27.csv&#39;,
+ &#39;data/2000-01-05.csv&#39;,
+ &#39;data/2000-01-13.csv&#39;,
+ &#39;data/2000-01-08.csv&#39;,
+ &#39;data/2000-01-30.csv&#39;,
+ &#39;data/2000-01-18.csv&#39;,
+ &#39;data/2000-01-11.csv&#39;,
  &#39;data/2000-01-23.csv&#39;,
- &#39;data/2000-01-03.csv&#39;,
- &#39;data/2000-01-15.csv&#39;,
- &#39;data/2000-01-22.csv&#39;]
+ &#39;data/2000-01-14.csv&#39;]
 </pre></div></div>
 </div>
 <p>Now we run the delayed read_data function on each file in the list</p>
@@ -1724,36 +1793,36 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[Delayed(&#39;read_data-f5b3026c-9f56-4aa5-9fd1-10107f5adf64&#39;),
- Delayed(&#39;read_data-ccf4eb7a-2608-41c4-91b2-aae9498652fd&#39;),
- Delayed(&#39;read_data-50ef42cc-c0cd-4175-a188-02a78f567397&#39;),
- Delayed(&#39;read_data-949e6eaa-6cae-4c1f-8ee8-aa301f2d377e&#39;),
- Delayed(&#39;read_data-a8f620e9-7add-467d-96e3-7e4507c90bd1&#39;),
- Delayed(&#39;read_data-9aa9136c-2abd-4514-8519-971abc0f3e39&#39;),
- Delayed(&#39;read_data-85435b8c-b332-4880-bacc-d3af2fe0aa67&#39;),
- Delayed(&#39;read_data-21474ca9-27fb-4f74-a976-41b528bb42ab&#39;),
- Delayed(&#39;read_data-06067e4c-b711-4406-b708-e95a007c312f&#39;),
- Delayed(&#39;read_data-0cf4b0c0-6fbb-40c4-a663-18616a1195a3&#39;),
- Delayed(&#39;read_data-0b1dba56-d6a3-48c9-ad5c-e1970fb21e1b&#39;),
- Delayed(&#39;read_data-68b586f8-bffc-4157-b30a-beaa1f4da9cd&#39;),
- Delayed(&#39;read_data-72766d64-6bc0-4aa1-bdfe-464e3a8dbdd9&#39;),
- Delayed(&#39;read_data-ac6c126b-f39a-4c4c-97e2-64abdadf9c23&#39;),
- Delayed(&#39;read_data-4c95d807-35cf-48ab-95f2-4b0a619105f7&#39;),
- Delayed(&#39;read_data-99483a23-ada5-4bdb-b3dc-aeefc5ccd5cd&#39;),
- Delayed(&#39;read_data-c99a6e29-2d4a-4f6b-befc-b329c42cd82d&#39;),
- Delayed(&#39;read_data-5cc20f13-0ded-45be-999f-b5788294049a&#39;),
- Delayed(&#39;read_data-df912ce6-f6bb-46d4-8df7-a316a2ad1783&#39;),
- Delayed(&#39;read_data-fc6d2e32-8c5f-4a2b-b251-e7a16856b1cb&#39;),
- Delayed(&#39;read_data-6c0b988a-80d8-4ffc-b81b-2c43ef8c968f&#39;),
- Delayed(&#39;read_data-e5a0fa65-a5b8-4491-a932-a6ea117b45b0&#39;),
- Delayed(&#39;read_data-0de9e70f-0f86-4c6f-89a9-a45448d0aa54&#39;),
- Delayed(&#39;read_data-b6c85a30-a831-45f1-90b4-ba4f7080ed76&#39;),
- Delayed(&#39;read_data-d8b3e2ff-5368-438f-a36f-664e2d84e4f1&#39;),
- Delayed(&#39;read_data-f8c46a42-86f5-4f08-bf14-ff323ef01298&#39;),
- Delayed(&#39;read_data-773d259a-0fb7-4e6a-ae7f-543e9693ea0f&#39;),
- Delayed(&#39;read_data-d8dabaa8-c675-4089-8da8-5ec144a734fd&#39;),
- Delayed(&#39;read_data-33474628-542c-4dd7-9514-5f6670bbb947&#39;),
- Delayed(&#39;read_data-e1a8bede-a683-43de-9a0d-4f9e25b557e3&#39;)]
+[Delayed(&#39;read_data-9c80b785-b340-44e8-b3da-4f4a8e3bd6ad&#39;),
+ Delayed(&#39;read_data-6d833015-3f83-4470-9261-1959b2204c0a&#39;),
+ Delayed(&#39;read_data-7b0871b5-d5be-4191-abe2-7b1c0d03367d&#39;),
+ Delayed(&#39;read_data-93d2687b-db25-4227-98b9-28e7e3280def&#39;),
+ Delayed(&#39;read_data-011c2a76-8d73-48fd-849a-aeb78ac57ef5&#39;),
+ Delayed(&#39;read_data-376a321d-e6b9-48b8-8415-29facdb7092a&#39;),
+ Delayed(&#39;read_data-8e5e3f0b-4829-4d0c-970e-5f7b6772e1d2&#39;),
+ Delayed(&#39;read_data-ddd3b444-9418-4a56-ae15-55921a9745eb&#39;),
+ Delayed(&#39;read_data-a4c25013-c367-4e95-81ca-c7021c66ab44&#39;),
+ Delayed(&#39;read_data-3fd04b2b-6d09-4abf-b6ce-a91e668c1505&#39;),
+ Delayed(&#39;read_data-a63f0372-fe6e-4d4a-9bf6-a0cfb16181a1&#39;),
+ Delayed(&#39;read_data-e54a0ca4-baa2-4fe6-9689-4f2683928d6a&#39;),
+ Delayed(&#39;read_data-0933c9cb-69d8-4ca1-9efb-6b8487321c1a&#39;),
+ Delayed(&#39;read_data-f4859e3c-db7f-436d-8f26-5574db792b15&#39;),
+ Delayed(&#39;read_data-388b01f1-f0fa-470c-8580-92ff96c74a89&#39;),
+ Delayed(&#39;read_data-0af06681-b50e-4ba3-954d-d76a65fec5a5&#39;),
+ Delayed(&#39;read_data-19cfa288-a39b-4220-9973-69aef2b329ad&#39;),
+ Delayed(&#39;read_data-84f01c6e-e17b-474d-b921-ebc65640d34e&#39;),
+ Delayed(&#39;read_data-60240aa4-750c-4ff5-a21e-029cc2a48b96&#39;),
+ Delayed(&#39;read_data-bcf57577-67a9-4c7b-95c7-a114043c473f&#39;),
+ Delayed(&#39;read_data-717fc7a4-ec64-4111-b9be-fdd0d91bfdd3&#39;),
+ Delayed(&#39;read_data-73994c6a-f701-4c32-a576-8d8ecc0489c9&#39;),
+ Delayed(&#39;read_data-510d62c2-6daa-4864-8f65-24d585f3415d&#39;),
+ Delayed(&#39;read_data-ce8777ca-9569-4ca0-9499-54d61dd33978&#39;),
+ Delayed(&#39;read_data-005a18a9-842f-477d-9b30-f7edf8927778&#39;),
+ Delayed(&#39;read_data-f426e6f8-39e4-45bd-87eb-0fe5e64f1909&#39;),
+ Delayed(&#39;read_data-fb4f320c-ff2d-459d-8747-15b88b744330&#39;),
+ Delayed(&#39;read_data-f5cbf3f0-b50c-4f7b-aafd-854a3c7faf00&#39;),
+ Delayed(&#39;read_data-a467c638-682d-476d-b280-3e145400b94b&#39;),
+ Delayed(&#39;read_data-7fd07581-8f13-49e2-8585-36316f73fb70&#39;)]
 </pre></div></div>
 </div>
 <p>Then we use <a class="reference external" href="https://docs.dask.org/en/latest/dataframe-api.html#dask.dataframe.from_delayed">dask.dataframe.from_delayed</a>. This function creates a Dask DataFrame from a list of delayed objects as long as each delayed object returns a pandas dataframe. The structure of each individual dataframe returned must also be the same.</p>
@@ -1889,38 +1958,38 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
   <tbody>
     <tr>
       <th>0</th>
-      <td>992</td>
-      <td>Jerry</td>
-      <td>-0.039613</td>
-      <td>0.992263</td>
+      <td>1000</td>
+      <td>Wendy</td>
+      <td>-0.455991</td>
+      <td>-0.267803</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1001</td>
-      <td>Xavier</td>
-      <td>0.634841</td>
-      <td>-0.987546</td>
+      <td>970</td>
+      <td>Ingrid</td>
+      <td>-0.797437</td>
+      <td>0.454575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1004</td>
-      <td>Laura</td>
-      <td>-0.957745</td>
-      <td>0.790361</td>
+      <td>1008</td>
+      <td>Edith</td>
+      <td>0.430180</td>
+      <td>-0.506511</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1035</td>
-      <td>Sarah</td>
-      <td>0.129738</td>
-      <td>-0.539430</td>
+      <td>960</td>
+      <td>Wendy</td>
+      <td>0.803023</td>
+      <td>0.822974</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>998</td>
-      <td>Kevin</td>
-      <td>0.320897</td>
-      <td>0.611856</td>
+      <td>1006</td>
+      <td>Yvonne</td>
+      <td>0.556653</td>
+      <td>-0.786353</td>
     </tr>
   </tbody>
 </table>
@@ -1940,7 +2009,7 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/home/travis/miniconda/envs/test/lib/python3.8/site-packages/dask/array/numpy_compat.py:40: RuntimeWarning: invalid value encountered in true_divide
+/usr/share/miniconda3/envs/dask-examples/lib/python3.8/site-packages/dask/array/numpy_compat.py:40: RuntimeWarning: invalid value encountered in true_divide
   x = np.divide(x1, x2, out)
 </pre></div></div>
 </div>
@@ -1981,45 +2050,45 @@ Delayed(&#39;read_data-63bfae8d-ba0f-4c3d-8f37-9acdb4f7424a&#39;)
     </tr>
     <tr>
       <th>mean</th>
-      <td>1.000005e+03</td>
-      <td>3.826339e-05</td>
-      <td>2.559701e-04</td>
+      <td>9.999775e+02</td>
+      <td>6.427909e-04</td>
+      <td>2.713981e-04</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>3.160887e+01</td>
-      <td>5.771635e-01</td>
-      <td>5.773276e-01</td>
+      <td>3.162853e+01</td>
+      <td>5.774183e-01</td>
+      <td>5.772543e-01</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>8.300000e+02</td>
-      <td>-9.999997e-01</td>
-      <td>-9.999982e-01</td>
+      <td>8.470000e+02</td>
+      <td>-9.999991e-01</td>
+      <td>-9.999996e-01</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>9.790000e+02</td>
-      <td>-4.944113e-01</td>
-      <td>-4.896296e-01</td>
+      <td>-4.950141e-01</td>
+      <td>-4.961357e-01</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>1.000000e+03</td>
-      <td>8.884265e-03</td>
-      <td>9.616791e-03</td>
+      <td>7.317552e-03</td>
+      <td>5.409636e-03</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1.022000e+03</td>
-      <td>5.056111e-01</td>
-      <td>5.071397e-01</td>
+      <td>1.021000e+03</td>
+      <td>5.055906e-01</td>
+      <td>5.079348e-01</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>1.161000e+03</td>
-      <td>1.000000e+00</td>
-      <td>9.999987e-01</td>
+      <td>1.171000e+03</td>
+      <td>9.999976e-01</td>
+      <td>9.999998e-01</td>
     </tr>
   </tbody>
 </table>
@@ -2055,28 +2124,25 @@ ga('send', 'pageview');
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2018, Dask Developers
+        &#169; Copyright 2018, Dask Developers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
